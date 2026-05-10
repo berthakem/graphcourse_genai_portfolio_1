@@ -1,1 +1,1 @@
-# graphcourse_genai_portfolio_1
+# graph_ai_portfolio
