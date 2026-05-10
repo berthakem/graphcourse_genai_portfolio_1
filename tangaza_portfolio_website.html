@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tangaza — Bertha Kembabazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #efe8db;
+      --paper-2: #e6decd;
+      --card: #f8f1df;
+      --ink: #1a1714;
+      --ink-2: #4a423a;
+      --ink-3: #897c6d;
+      --rule: #1a1714;
+      --rule-soft: rgba(26, 23, 20, 0.14);
+      --accent: #c8421e;
+      --accent-tint: rgba(200, 66, 30, 0.07);
+      --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(ellipse at 50% -10%, rgba(200, 66, 30, 0.06), transparent 55%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.16 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'ss01', 'liga';
+    }
+
+    .container {
+      width: min(1280px, 100% - 40px);
+      margin: 0 auto;
+    }
+
+    ::selection { background: var(--accent); color: var(--paper); }
+
+    /* ---------- TOP BAR ---------- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 24px;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      font-variation-settings: 'opsz' 144;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .brand .mark {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 400;
+      font-size: 0.95rem;
+      transform: translateY(-2px);
+    }
+    .nav {
+      display: flex;
+      gap: 30px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .nav a {
+      color: var(--ink-2);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .nav a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 88px 0 96px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .hero-label::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: var(--ink);
+    }
+    .hero-label .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 99px;
+      display: inline-block;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(3.6rem, 10.5vw, 10.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      font-variation-settings: 'opsz' 144;
+    }
+    .hero h1 .em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+    .hero-byline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+      color: var(--ink-2);
+      margin-top: 10px;
+      letter-spacing: -0.02em;
+      font-variation-settings: 'opsz' 96;
+    }
+    .hero-lede {
+      max-width: 540px;
+      font-size: 1.18rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+      margin-top: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 36px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .link-button {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.25s, border-color 0.25s, gap 0.3s;
+    }
+    .link-button.primary {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .link-button:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      gap: 14px;
+    }
+
+    /* ---------- PORTRAIT ---------- */
+    .portrait {
+      position: relative;
+    }
+    .portrait-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border: 1px solid var(--ink);
+      background: var(--card);
+      overflow: hidden;
+    }
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid var(--rule-soft);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.04) saturate(0.93);
+      transition: transform 0.6s cubic-bezier(.2, .7, .3, 1);
+    }
+    .portrait-frame:hover img {
+      transform: scale(1.03);
+    }
+    .portrait-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 14px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-3);
+      border-top: 1px solid var(--rule-soft);
+      margin-top: 12px;
+    }
+    .portrait-meta .accent { color: var(--accent); }
+
+    /* ---------- EDITORIAL SECTIONS ---------- */
+    section.editorial {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .section-meta {
+      position: sticky;
+      top: 100px;
+    }
+    .section-kicker {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ink-2);
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-kicker::before {
+      content: "✦";
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.1rem, 4.6vw, 4.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      font-variation-settings: 'opsz' 96;
+      max-width: 14ch;
+      cursor: default;
+    }
+    .section-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+    .section-body { align-self: start; }
+    .section-lede {
+      font-size: 1.18rem;
+      line-height: 1.65;
+      color: var(--ink-2);
+      max-width: 60ch;
+      margin-bottom: 36px;
+    }
+    .section-lede::first-letter {
+      font-family: var(--serif);
+      font-size: 3.6em;
+      float: left;
+      line-height: 0.85;
+      padding: 8px 14px 0 0;
+      font-weight: 400;
+      color: var(--accent);
+      font-variation-settings: 'opsz' 144;
+    }
+
+    /* annotations — preserved hover reveal, redesigned as footnotes */
+    .reveal-bar {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-3);
+      padding: 14px 0;
+      border-top: 1px solid var(--rule-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .reveal-bar .arrow { transition: transform 0.4s ease; display: inline-block; }
+    .editorial:hover .reveal-bar { color: var(--accent); border-top-color: var(--accent); }
+    .editorial:hover .reveal-bar .arrow { transform: rotate(180deg); }
+
+    .annotations {
+      display: grid;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: max-height 0.5s ease, opacity 0.4s ease, transform 0.5s ease;
+    }
+    .editorial:hover .annotations,
+    .editorial:focus-within .annotations {
+      max-height: 800px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .annotation {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      align-items: baseline;
+    }
+    .annotation:last-child { border-bottom: none; }
+    .annotation-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      font-variation-settings: 'opsz' 96;
+    }
+    .annotation strong {
+      display: block;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.25rem;
+      letter-spacing: -0.015em;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-variation-settings: 'opsz' 48;
+    }
+    .annotation span {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    /* ---------- WEEKLY — TABLE OF CONTENTS ---------- */
+    .toc-section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .toc-header {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+      margin-bottom: 56px;
+    }
+    .toc-list {
+      border-top: 2px solid var(--ink);
+    }
+    .toc-row {
+      display: grid;
+      grid-template-columns: 76px 1.15fr 1.6fr 180px 150px;
+      gap: 28px;
+      padding: 28px 8px;
+      border-bottom: 1px solid var(--rule-soft);
+      align-items: baseline;
+      transition: background 0.35s ease, padding 0.35s ease;
+      position: relative;
+    }
+    .toc-row:hover {
+      background: var(--accent-tint);
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .toc-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2.6rem;
+      line-height: 0.9;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      transition: color 0.35s;
+      font-variation-settings: 'opsz' 96;
+    }
+    .toc-row:hover .toc-num { color: var(--accent); }
+    .toc-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.55rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-variation-settings: 'opsz' 48;
+    }
+    .toc-desc {
+      font-size: 0.97rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+    .toc-date {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-2);
+    }
+    .toc-status {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-3);
+      text-align: right;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .toc-status::before {
+      content: "○";
+      color: var(--accent);
+      font-size: 0.85rem;
+      transition: content 0.3s;
+    }
+    .toc-row:hover .toc-status::before { content: "●"; }
+
+    /* ---------- FINAL PROJECT — BENTO ---------- */
+    .final-section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .final-header {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+      margin-bottom: 56px;
+    }
+    .final-bento {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 22px;
+    }
+    .featured-card {
+      grid-row: span 3;
+      padding: 56px;
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 460px;
+    }
+    .featured-card::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(239, 232, 219, 0.14);
+      pointer-events: none;
+    }
+    .featured-card .stamp {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(239, 232, 219, 0.55);
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+    .featured-card .stamp .accent { color: var(--accent); }
+    .featured-card .body { position: relative; z-index: 1; }
+    .featured-card h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.7rem, 3.4vw, 2.9rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+      font-variation-settings: 'opsz' 96;
+    }
+    .featured-card h3 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+    }
+    .featured-card p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: rgba(239, 232, 219, 0.78);
+      max-width: 52ch;
+    }
+    .featured-card .glyph {
+      position: absolute;
+      bottom: 56px;
+      right: 56px;
+      font-family: var(--serif);
+      font-size: 5rem;
+      color: var(--accent);
+      font-style: italic;
+      line-height: 1;
+      z-index: 1;
+    }
+
+    .idea-card {
+      padding: 30px 32px;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      transition: transform 0.35s, background 0.35s, color 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    .idea-card::after {
+      content: "→";
+      position: absolute;
+      top: 30px;
+      right: 32px;
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      color: var(--ink-3);
+      transition: transform 0.35s, color 0.35s;
+    }
+    .idea-card:hover {
+      background: var(--ink);
+      color: var(--paper);
+      transform: translateX(6px);
+    }
+    .idea-card:hover::after {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+    .idea-card .idea-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ink-3);
+      margin-bottom: 14px;
+      transition: color 0.35s;
+    }
+    .idea-card:hover .idea-num { color: rgba(239, 232, 219, 0.65); }
+    .idea-card strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.1;
+      max-width: 22ch;
+      font-variation-settings: 'opsz' 48;
+    }
+    .idea-card strong em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .idea-card span {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--ink-2);
+      transition: color 0.35s;
+      display: block;
+      max-width: 36ch;
+    }
+    .idea-card:hover span { color: rgba(239, 232, 219, 0.85); }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      padding: 56px 0;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    footer .accent { color: var(--accent); }
+    footer .glyph {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    /* ---------- ON-LOAD REVEAL ---------- */
+    .reveal { animation: reveal 1s cubic-bezier(.2, .7, .3, 1) both; }
+    .reveal.d1 { animation-delay: 0.05s; }
+    .reveal.d2 { animation-delay: 0.15s; }
+    .reveal.d3 { animation-delay: 0.25s; }
+    .reveal.d4 { animation-delay: 0.35s; }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 980px) {
+      .hero-grid, .section-grid, .toc-header, .final-header, .final-bento {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .section-meta { position: static; }
+      .toc-row {
+        grid-template-columns: 64px 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 8px 18px;
+        padding: 24px 8px;
+      }
+      .toc-num { grid-row: span 4; font-size: 2.1rem; }
+      .toc-title, .toc-desc, .toc-date, .toc-status {
+        grid-column: 2;
+        text-align: left;
+        justify-content: flex-start;
+      }
+      .featured-card { grid-row: auto; padding: 36px; min-height: 360px; }
+      .featured-card .glyph { display: none; }
+      .nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 64px 0 80px; }
+      section.editorial, .toc-section, .final-section { padding: 72px 0; }
+      .annotations {
+        max-height: none;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        margin-top: 18px;
+      }
+      .reveal-bar { display: none; }
+      .featured-card { padding: 28px; }
+      footer { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#home" class="brand"><span class="mark">✦</span>Tangaza</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#course">Course</a>
+        <a href="#final-project">Final Project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-label reveal d1">
+            <span class="dot"></span>
+            <span>Generative AI for Work &amp; Research</span>
+          </div>
+          <h1 class="reveal d2">
+            <span class="em">Tangaza</span>
+          </h1>
+          <p class="hero-byline reveal d2">by Bertha Kembabazi</p>
+          <p class="hero-lede reveal d3">
+            Spotlighting health data to reveal more comprehensive insights for smarter public health decisions.
+          </p>
+          <div class="hero-actions reveal d4">
+            <a href="#course" class="link-button primary">Explore the course journey →</a>
+            <a href="#about" class="link-button">Meet Bertha</a>
+          </div>
+        </div>
+
+        <div class="portrait reveal d3" aria-label="Portrait">
+          <div class="portrait-frame">
+            <img src="assets/images/bee.png" alt="Bertha Kembabazi portrait" />
+          </div>
+          <div class="portrait-meta">
+            <span>Bertha Kembabazi</span>
+            <span class="accent">✦</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="editorial">
+      <div class="container section-grid">
+        <div class="section-meta">
+          <div class="section-kicker"><span>About me</span></div>
+          <h2 class="section-title">Making healthcare data <em>clearer,</em> more <em>inclusive,</em> and more useful.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">
+            I work at the intersection of health information systems, data governance, analytics, and digital transformation. Through Tangaza, I am exploring how generative AI can help turn complex health information into clearer insights, better workflows, and more accessible knowledge for decision-makers and communities.
+          </p>
+
+          <div class="reveal-bar">
+            <span>Hover to reveal annotations</span>
+            <span class="arrow">↓</span>
+          </div>
+          <div class="annotations" aria-label="About me focus areas">
+            <article class="annotation">
+              <span class="annotation-num">i.</span>
+              <div>
+                <strong>Health data with purpose</strong>
+                <span>Data that moves beyond storage and reporting into interpretation, action, and accountability.</span>
+              </div>
+            </article>
+            <article class="annotation">
+              <span class="annotation-num">ii.</span>
+              <div>
+                <strong>Accessible intelligence</strong>
+                <span>Insights that work for both technical and non-technical audiences.</span>
+              </div>
+            </article>
+            <article class="annotation">
+              <span class="annotation-num">iii.</span>
+              <div>
+                <strong>AI as an amplifier</strong>
+                <span>No-code and low-code tools for research, communication, analysis, and everyday knowledge work.</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE -->
+    <section id="course" class="editorial">
+      <div class="container section-grid">
+        <div class="section-meta">
+          <div class="section-kicker"><span>About the course</span></div>
+          <h2 class="section-title">A <em>practical</em> journey into AI-enabled work.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">
+            The course explores no-code AI tools for productivity, task automation, research, data analysis, communication, and final project development. This page will serve as a living portfolio of weekly submissions and reflections.
+          </p>
+
+          <div class="reveal-bar">
+            <span>Hover to reveal annotations</span>
+            <span class="arrow">↓</span>
+          </div>
+          <div class="annotations" aria-label="Course focus areas">
+            <article class="annotation">
+              <span class="annotation-num">i.</span>
+              <div>
+                <strong>Learning mode</strong>
+                <span>Weekly prework, practical workshops, active exercises, peer learning, and project-based application.</span>
+              </div>
+            </article>
+            <article class="annotation">
+              <span class="annotation-num">ii.</span>
+              <div>
+                <strong>Portfolio approach</strong>
+                <span>Each week becomes evidence of what I built, what I learned, and how it connects to health data.</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKLY SUBMISSIONS — TABLE OF CONTENTS -->
+    <section id="weekly-submissions" class="toc-section">
+      <div class="container">
+        <div class="toc-header">
+          <div class="section-meta">
+            <div class="section-kicker"><span>Weekly submissions</span></div>
+            <h2 class="section-title"><em>Roadmap</em> of the learning journey.</h2>
+          </div>
+          <p class="section-lede">
+            Links will be added as submissions are completed. For now, each milestone is a placeholder for the weekly artefacts, reflections, and practical outputs.
+          </p>
+        </div>
+
+        <div class="toc-list">
+          <article class="toc-row">
+            <div class="toc-num">01</div>
+            <h3 class="toc-title">Websites &amp; Presentations</h3>
+            <p class="toc-desc">Building a web presence with AI support, understanding websites versus web applications, and exploring AI presentation tools.</p>
+            <span class="toc-date">May 10 / May 13</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">02</div>
+            <h3 class="toc-title">Automated Data Analysis</h3>
+            <p class="toc-desc">Exploring AI-supported analysis tools, dashboards, spreadsheets, and privacy-aware data workflows.</p>
+            <span class="toc-date">May 17 / May 20</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">03</div>
+            <h3 class="toc-title">Text Processing &amp; Research</h3>
+            <p class="toc-desc">Using AI for classification, sentiment analysis, summarization, literature search, and knowledge synthesis.</p>
+            <span class="toc-date">May 24 / May 27</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">04</div>
+            <h3 class="toc-title">Custom GPTs &amp; Chatbots</h3>
+            <p class="toc-desc">Designing task-specific assistants, understanding model choices, and building interactive chatbot experiences.</p>
+            <span class="toc-date">May 31 / Jun 3</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">05</div>
+            <h3 class="toc-title">AI for Workflow Automation</h3>
+            <p class="toc-desc">Comparing agents and workflows, then prototyping automations for routine knowledge and productivity tasks.</p>
+            <span class="toc-date">Jun 7 / Jun 10</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">06</div>
+            <h3 class="toc-title">GenAI for Communication &amp; Outreach</h3>
+            <p class="toc-desc">Creating graphics, diagrams, and visual communication assets that translate complex ideas for broader audiences.</p>
+            <span class="toc-date">Jun 14 / Jun 17</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">07</div>
+            <h3 class="toc-title">Final Project Feedback</h3>
+            <p class="toc-desc">Refining the final project concept through peer feedback, troubleshooting, and focused iteration.</p>
+            <span class="toc-date">Jun 21 / Jun 24</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+
+          <article class="toc-row">
+            <div class="toc-num">08</div>
+            <h3 class="toc-title">Final Project Showcase</h3>
+            <p class="toc-desc">Presenting the final artefact and demonstrating how generative AI can support real work and research needs.</p>
+            <span class="toc-date">Jun 28 / Jul 1</span>
+            <span class="toc-status">Coming soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL PROJECT — BENTO -->
+    <section id="final-project" class="final-section">
+      <div class="container">
+        <div class="final-header">
+          <div class="section-meta">
+            <div class="section-kicker"><span>Final project</span></div>
+            <h2 class="section-title">From <em>learning</em> to a practical AI artefact.</h2>
+          </div>
+          <p class="section-lede">
+            The final project is still being shaped. The direction will remain aligned with Tangaza: using AI to bring clarity, structure, and insight to health data, public health knowledge, or research workflows.
+          </p>
+        </div>
+
+        <div class="final-bento">
+          <article class="featured-card">
+            <div class="stamp">
+              <span>Potential focus</span>
+              <span class="accent">✦ Tangaza</span>
+            </div>
+            <div class="body">
+              <h3>A practical AI workflow for <em>health data insight</em> and <em>communication.</em></h3>
+              <p>The final artefact may explore how generative AI can support evidence synthesis, data storytelling, governance documentation, dashboard interpretation, or decision-ready briefing products for public health teams.</p>
+            </div>
+            <span class="glyph">✦</span>
+          </article>
+
+          <article class="idea-card">
+            <div class="idea-num">Idea 01</div>
+            <strong><em>AI insight brief</em> generator</strong>
+            <span>A guided workflow that turns health data notes into clear, non-technical briefing summaries.</span>
+          </article>
+
+          <article class="idea-card">
+            <div class="idea-num">Idea 02</div>
+            <strong>Health data <em>governance</em> assistant</strong>
+            <span>A structured assistant for documenting datasets, data quality checks, and responsible use considerations.</span>
+          </article>
+
+          <article class="idea-card">
+            <div class="idea-num">Idea 03</div>
+            <strong>Research <em>synthesis</em> companion</strong>
+            <span>A tool-assisted process for organizing literature, extracting themes, and producing accessible knowledge products.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© 2026 — <span class="glyph">Tangaza</span> by Bertha Kembabazi</span>
+    <span>Built as a portfolio for Generative AI for Work &amp; Research <span class="accent">✦</span></span>
+  </footer>
+
+</body>
+</html>
