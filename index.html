@@ -461,6 +461,33 @@
       transition: content 0.3s;
     }
     .toc-row:hover .toc-status::before { content: "●"; }
+    .toc-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+    .toc-links a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 3px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .toc-links a:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .toc-status.complete {
+      color: var(--accent);
+    }
+    .toc-status.complete::before {
+      content: "●";
+    }
 
     /* ---------- FINAL PROJECT — BENTO ---------- */
     .final-section {
@@ -658,6 +685,11 @@
         text-align: left;
         justify-content: flex-start;
       }
+      .toc-links {
+        grid-column: 2;
+        align-items: flex-start;
+        margin-top: 6px;
+      }
       .featured-card { grid-row: auto; padding: 36px; min-height: 360px; }
       .featured-card .glyph { display: none; }
       .nav { display: none; }
@@ -688,6 +720,7 @@
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#course">Course</a>
+        <a href="#weekly-submissions">Submissions</a>
         <a href="#final-project">Final Project</a>
       </nav>
     </div>
@@ -816,7 +849,7 @@
             <h2 class="section-title"><em>Roadmap</em> of the learning journey.</h2>
           </div>
           <p class="section-lede">
-            Links will be added as submissions are completed. For now, each milestone is a placeholder for the weekly artefacts, reflections, and practical outputs.
+            Completed submissions are linked below as viewable artefacts. Each week captures a practical output, the AI tools used, and what I learned through the process.
           </p>
         </div>
 
@@ -824,17 +857,24 @@
           <article class="toc-row">
             <div class="toc-num">01</div>
             <h3 class="toc-title">Websites &amp; Presentations</h3>
-            <p class="toc-desc">Building a web presence with AI support, understanding websites versus web applications, and exploring AI presentation tools.</p>
+            <p class="toc-desc">Building this portfolio website with AI support, understanding websites versus web applications, and creating a public home for weekly course artefacts.</p>
             <span class="toc-date">May 10 / May 13</span>
-            <span class="toc-status">Coming soon</span>
+            <div class="toc-links">
+              <span class="toc-status complete">Published</span>
+              <a href="https://berthakem.github.io/graphcourse_genai_portfolio_1/" target="_blank" rel="noopener">View portfolio</a>
+            </div>
           </article>
 
           <article class="toc-row">
             <div class="toc-num">02</div>
             <h3 class="toc-title">Automated Data Analysis</h3>
-            <p class="toc-desc">Exploring AI-supported analysis tools, dashboards, spreadsheets, and privacy-aware data workflows.</p>
+            <p class="toc-desc">Analyzing the 2020 relationship between life expectancy and GDP per capita using Gapminder data downloaded from gapminder.org/data.</p>
             <span class="toc-date">May 17 / May 20</span>
-            <span class="toc-status">Coming soon</span>
+            <div class="toc-links">
+              <span class="toc-status complete">Published</span>
+              <a href="submissions/week-02-gapminder-report.html">View report</a>
+              <a href="assets/submissions/GDP_LE_2020_KEMBABAZI_REVISED.pdf" target="_blank" rel="noopener">Open PDF</a>
+            </div>
           </article>
 
           <article class="toc-row">
