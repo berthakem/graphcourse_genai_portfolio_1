@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop 4 Chatbot - Bertha Kembabazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #efe8db;
+      --card: #f8f1df;
+      --ink: #1a1714;
+      --ink-2: #4a423a;
+      --ink-3: #897c6d;
+      --rule: #1a1714;
+      --rule-soft: rgba(26, 23, 20, 0.14);
+      --accent: #c8421e;
+      --accent-tint: rgba(200, 66, 30, 0.08);
+      --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(ellipse at 50% -10%, rgba(200, 66, 30, 0.06), transparent 55%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.16 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1180px, 100% - 40px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.025em;
+    }
+
+    .brand span { color: var(--accent); font-style: normal; font-size: 0.95rem; margin-right: 8px; }
+
+    .back-link,
+    .open-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 5px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .back-link:hover,
+    .open-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      padding: 58px 0 36px;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+
+    .kicker {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ink-2);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.7rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 980px;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-weight: 300;
+    }
+
+    .summary {
+      max-width: 780px;
+      margin-top: 26px;
+      color: var(--ink-2);
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin-top: 34px;
+    }
+
+    .meta-item {
+      padding: 18px 20px;
+      border-right: 1px solid var(--rule-soft);
+    }
+
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-3);
+      margin-bottom: 8px;
+    }
+
+    .meta-value {
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+
+    .chatbot-wrap {
+      padding: 42px 0 72px;
+    }
+
+    .chatbot-panel {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 34px 0;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .panel-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-copy {
+      color: var(--ink-2);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner,
+      .chatbot-panel {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .meta-item {
+        border-right: none;
+        border-bottom: 1px solid var(--rule-soft);
+      }
+      .meta-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="../index.html"><span>✦</span>Tangaza</a>
+      <a class="back-link" href="../index.html#weekly-submissions">Back to portfolio</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="kicker">Workshop 4 · Custom GPTs &amp; Chatbots · 3 June 2026</div>
+        <h1>A Tangaza <em>portfolio chatbot</em>.</h1>
+        <p class="summary">
+          This submission embeds a Botpress chatbot into the Tangaza portfolio as a practical artefact for the custom GPTs and chatbots lesson. The chatbot creates an interactive layer for visitors and demonstrates how conversational assistants can support a public learning portfolio.
+        </p>
+        <div class="meta-grid" aria-label="Submission metadata">
+          <div class="meta-item">
+            <span class="meta-label">Tool</span>
+            <span class="meta-value">Botpress webchat</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Focus</span>
+            <span class="meta-value">Custom chatbot integration</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Output</span>
+            <span class="meta-value">Embedded portfolio assistant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chatbot-wrap">
+      <div class="container">
+        <div class="chatbot-panel">
+          <h2 class="panel-title">Chatbot submission</h2>
+          <div>
+            <p class="panel-copy">
+              The chatbot is embedded on this submission page and on the main portfolio page. It uses the Botpress webchat loader and the course chatbot configuration provided for this lesson.
+            </p>
+            <div class="panel-actions">
+              <a class="open-link" href="../index.html">Open main portfolio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/06/03/15/20260603152836-CXL4MSTJ.js" defer></script>
+</body>
+</html>
