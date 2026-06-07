@@ -489,6 +489,28 @@
       content: "●";
     }
 
+    /* ---------- CONSULTATION FORM ---------- */
+    .form-section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .form-header {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+    .form-intro .section-lede {
+      margin-bottom: 28px;
+    }
+    .form-frame {
+      width: 100%;
+      height: 1221px;
+      display: block;
+      border: 1px solid var(--rule);
+      background: var(--card);
+    }
+
     /* ---------- FINAL PROJECT — BENTO ---------- */
     .final-section {
       padding: 112px 0;
@@ -668,7 +690,7 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 980px) {
-      .hero-grid, .section-grid, .toc-header, .final-header, .final-bento {
+      .hero-grid, .section-grid, .toc-header, .form-header, .final-header, .final-bento {
         grid-template-columns: 1fr;
         gap: 48px;
       }
@@ -696,7 +718,7 @@
     }
     @media (max-width: 600px) {
       .hero { padding: 64px 0 80px; }
-      section.editorial, .toc-section, .final-section { padding: 72px 0; }
+      section.editorial, .toc-section, .form-section, .final-section { padding: 72px 0; }
       .annotations {
         max-height: none;
         opacity: 1;
@@ -721,6 +743,7 @@
         <a href="#about">About</a>
         <a href="#course">Course</a>
         <a href="#weekly-submissions">Submissions</a>
+        <a href="#consultation-form">Consultation Form</a>
         <a href="#final-project">Final Project</a>
       </nav>
     </div>
@@ -904,9 +927,13 @@
           <article class="toc-row">
             <div class="toc-num">05</div>
             <h3 class="toc-title">AI for Workflow Automation</h3>
-            <p class="toc-desc">Comparing agents and workflows, then prototyping automations for routine knowledge and productivity tasks.</p>
+            <p class="toc-desc">Creating and publishing a consultation form to collect structured responses as the input step for an automated workflow.</p>
             <span class="toc-date">Jun 7 / Jun 10</span>
-            <span class="toc-status">Coming soon</span>
+            <div class="toc-links">
+              <span class="toc-status complete">Published</span>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScDJGBZY7rK9BqxMvHnG8RFUo2AMq2FzRDxAzAk5P4F441iSQ/viewform" target="_blank" rel="noopener">Open form</a>
+              <a href="#consultation-form">View embedded</a>
+            </div>
           </article>
 
           <article class="toc-row">
@@ -933,6 +960,33 @@
             <span class="toc-status">Coming soon</span>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- CONSULTATION FORM -->
+    <section id="consultation-form" class="form-section">
+      <div class="container">
+        <div class="form-header">
+          <div class="section-meta">
+            <div class="section-kicker"><span>Consultation form</span></div>
+            <h2 class="section-title">A structured input for <em>workflow automation.</em></h2>
+          </div>
+          <div class="form-intro">
+            <p class="section-lede">
+              This consultation form is the Week 05 practical exercise. It collects structured responses that can support follow-up, analysis, and future automated workflows.
+            </p>
+            <a class="link-button primary" href="https://docs.google.com/forms/d/e/1FAIpQLScDJGBZY7rK9BqxMvHnG8RFUo2AMq2FzRDxAzAk5P4F441iSQ/viewform" target="_blank" rel="noopener">Open form in a new tab →</a>
+          </div>
+        </div>
+        <iframe
+          class="form-frame"
+          src="https://docs.google.com/forms/d/e/1FAIpQLScDJGBZY7rK9BqxMvHnG8RFUo2AMq2FzRDxAzAk5P4F441iSQ/viewform?embedded=true"
+          title="Consultation form"
+          loading="lazy"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+        >Loading...</iframe>
       </div>
     </section>
 
